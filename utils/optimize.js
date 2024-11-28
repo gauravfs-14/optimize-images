@@ -6,7 +6,7 @@ import ora from "ora";
 
 export async function optimizeImages(inputDir, outputDir, options) {
   const { quality, format, width, height, report } = options;
-  const parsedQuality = parseInt(quality, 10); // Ensure quality is a number
+  const parsedQuality = parseInt(quality, 10);
   const validFormats = ["jpeg", "png", "webp", "avif"]; // Supported formats
   const reportData = [];
 
@@ -15,7 +15,7 @@ export async function optimizeImages(inputDir, outputDir, options) {
     return;
   }
 
-  if (!validFormats.includes(format)) {
+  if (format && !validFormats.includes(format)) {
     console.error(`Error: Unsupported format '${format}'. Use one of: ${validFormats.join(", ")}`);
     return;
   }
@@ -33,13 +33,18 @@ export async function optimizeImages(inputDir, outputDir, options) {
 
       for (const entry of entries) {
         const entryPath = path.join(dir, entry.name);
-        const outputFileName = `${path.basename(entryPath, path.extname(entryPath))}.${format}`;
-        const outputEntryPath = path.join(
-          outputDir,
-          path.relative(inputDir, path.join(path.dirname(entryPath), outputFileName))
-        );
+
+        // Determine file format and target output path
+        const inputFileFormat = path.extname(entry.name).slice(1).toLowerCase();
+        const outputFileFormat = format || inputFileFormat; // Use specified format or preserve original
+        const outputFileName = `${path.basename(entry.name, path.extname(entry.name))}.${outputFileFormat}`;
+        const outputEntryPath = path.join(outputDir, path.relative(inputDir, entryPath));
+
+        // Correct path for files (preserving directory structure)
+        const correctedOutputPath = path.join(path.dirname(outputEntryPath), outputFileName);
 
         if (entry.isDirectory()) {
+          // Create corresponding subdirectory in the output folder
           if (!fs.existsSync(outputEntryPath)) {
             fs.mkdirSync(outputEntryPath, { recursive: true });
           }
@@ -48,18 +53,30 @@ export async function optimizeImages(inputDir, outputDir, options) {
           const originalSize = fs.statSync(entryPath).size;
 
           console.log(`Processing file: ${entryPath}`);
-          console.log(`Output file: ${outputEntryPath}`);
+          console.log(`Output file: ${correctedOutputPath}`);
 
-          await sharp(entryPath)
-            .resize(
-              width ? parseInt(width, 10) : null,
-              height ? parseInt(height, 10) : null,
-              { fit: "inside", withoutEnlargement: true }
-            )
-            [format]({ quality: parsedQuality })
-            .toFile(outputEntryPath);
+          // Ensure parent directory exists for the output file
+          const parentDir = path.dirname(correctedOutputPath);
+          if (!fs.existsSync(parentDir)) {
+            fs.mkdirSync(parentDir, { recursive: true });
+          }
 
-          const compressedSize = fs.statSync(outputEntryPath).size;
+          // Process and save the image
+          const imageProcessor = sharp(entryPath).resize(
+            width ? parseInt(width, 10) : null,
+            height ? parseInt(height, 10) : null,
+            { fit: "inside", withoutEnlargement: true }
+          );
+
+          if (format) {
+            imageProcessor[format]({ quality: parsedQuality });
+          } else {
+            imageProcessor.toFormat(inputFileFormat, { quality: parsedQuality });
+          }
+
+          await imageProcessor.toFile(correctedOutputPath);
+
+          const compressedSize = fs.statSync(correctedOutputPath).size;
 
           if (report) {
             reportData.push({
