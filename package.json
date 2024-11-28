@@ -1,0 +1,19 @@
+{
+  "name": "optimize-images",
+  "version": "1.0.0",
+  "description": "CLI tool for compressing and optimizing images",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "optimize-images": "./index.js"
+  },
+  "dependencies": {
+    "commander": "^10.0.0",
+    "sharp": "^0.32.0",
+    "ora": "^7.0.0",
+    "chokidar": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}
