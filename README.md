@@ -1,6 +1,31 @@
 # **Optimize Images CLI**
 
+![npm version](https://img.shields.io/npm/v/optimize-images-cli)
+![npm downloads](https://img.shields.io/npm/dm/optimize-images-cli)
+![license](https://img.shields.io/npm/l/optimize-images-cli)
+![GitHub stars](https://img.shields.io/github/stars/gauravfs-14/optimize-images-cli)
+![GitHub issues](https://img.shields.io/github/issues/gauravfs-14/optimize-images-cli)
+
+
 **Optimize Images CLI** is a powerful and flexible command-line tool for compressing, resizing, and converting images. It supports modern image formats like WebP and AVIF, making it easy to optimize images for web and app development.
+
+## 📚 Table of Contents
+- [Features](#-features)
+- [Installation](#️-installation)
+- [Usage](#-usage)
+- [Examples](#-examples)
+  - [Basic Optimization](#1-basic-optimization)
+  - [Convert Images to WebP](#2-convert-images-to-webp)
+  - [Resize Images](#3-resize-images)
+  - [Generate an Optimization Report](#4-generate-an-optimization-report)
+  - [Watch Mode](#5-watch-mode)
+- [Directory Structure](#-directory-structure)
+- [Requirements](#-requirements)
+- [Tips](#-tips)
+- [License](#-license)
+- [Contributing](#-contributing)
+- [Feedback and Support](#-feedback-and-support)
+
 
 ---
 
@@ -116,6 +141,14 @@ optimized/
 - Use the `--watch` option for real-time optimization during development.
 - Combine resizing (`--width`, `--height`) with format conversion (`--format`) for maximum optimization.
 
+## ⚠️ Troubleshooting
+
+### "Command not found"
+If you encounter this error, make sure the CLI is installed globally:
+```bash
+npm install -g optimize-images-cli
+
+
 ---
 
 ## 📜 **License**
@@ -133,5 +166,26 @@ We welcome contributions! Please follow these steps:
 
 ---
 
+## 🚀 Roadmap
+Here are some planned features for future releases:
+- Support for **GIF** and **TIFF** formats.
+- Multi-threaded optimization for faster performance.
+- Export logs to a file with `--log` option.
+- Config file support for default options (`optimize-images.config.json`).
+
+Feel free to suggest new features by [opening an issue](https://github.com/gauravfs-14/optimize-images-cli/issues).
+
+
 ## 💬 **Feedback and Support**
 If you encounter any issues or have suggestions, feel free to open an issue on GitHub or contact at [contact@gaurabchhetri.com.np](mailto:contact@gaurabchhetri.com.np).
+
+## 🔒 Security
+If you find any security issues, please report them responsibly by contacting [contact@gaurabchhetri.com.np](mailto:contact@gaurabchhetri.com.np). We will address them promptly.
+
+## ❤️ Support
+If you like this project and want to support its development, consider:
+- ⭐ Starring this repository on GitHub.
+- ☕ [Buying me a coffee](https://www.buymeacoffee.com/gaurabch).
+- 💬 Sharing this tool with your network.
+
+Your support keeps this project alive and growing!
