@@ -147,7 +147,7 @@ optimized/
 If you encounter this error, make sure the CLI is installed globally:
 ```bash
 npm install -g optimize-images-cli
-
+```
 
 ---
 
