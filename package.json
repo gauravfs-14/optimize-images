@@ -1,20 +1,35 @@
 {
-  "name": "optimize-images",
+  "name": "optimize-images-cli",
   "version": "1.0.0",
-  "description": "CLI tool for compressing and optimizing images",
-  "license": "MIT",
+  "description": "A CLI tool for compressing and optimizing images.",
   "main": "index.js",
-  "type": "module",
   "bin": {
     "optimize-images": "./index.js"
   },
-  "dependencies": {
-    "commander": "^10.0.0",
-    "sharp": "^0.32.0",
-    "ora": "^7.0.0",
-    "chokidar": "^3.0.0"
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
   },
-  "devDependencies": {
-    "@types/node": "^20.0.0"
+  "keywords": [
+    "image",
+    "optimization",
+    "cli",
+    "sharp",
+    "resize"
+  ],
+  "author": "Your Name <contact@gaurabchhetri.com.np>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gauravfs-14/optimize-images-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gauravfs-14/optimize-images-cli/issues"
+  },
+  "homepage": "https://github.com/gauravfs-14/optimize-images-cli",
+  "dependencies": {
+    "sharp": "^0.32.0",
+    "commander": "^10.0.0",
+    "chokidar": "^3.5.3",
+    "ora": "^7.0.1"
   }
 }
